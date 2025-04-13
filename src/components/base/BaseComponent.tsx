@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BASE_PROPS } from '@/types/types';
 
-type Props<T extends React.ElementType> = BASE_PROPS<T> & {
-  ref?: React.Ref<React.ComponentRef<T>>;
-};
+type Props<T extends React.ElementType> = BASE_PROPS<T>;
 
 const DEFAULT_ELEMENT = 'div';
 
@@ -16,6 +14,7 @@ const Container = styled.div<Props<ELEMENT_TYPE>>`
   position: relative;
   display: block;
   width: 100%;
+  height: 100%;
 
   /* 커스텀 스타일을 위한 클래스 */
   &.custom {
