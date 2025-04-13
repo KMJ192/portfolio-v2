@@ -1,10 +1,11 @@
-import Accordion from "@/components/accordion/Accordion";
-import styles from "./page.module.css";
+'use client';
+
+import { useRef } from 'react';
+import styles from './page.module.css';
+import BaseComponent from '@/components/base/BaseComponent';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <Accordion title="Accordion">Test</Accordion>
-    </div>
-  );
+  const element = useRef<HTMLElement>(null);
+
+  return <div className={styles.page}></div>;
 }

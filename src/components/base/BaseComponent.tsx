@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { BASE_PROPS } from '@/types/types';
 
-interface Props {
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-  onMouseEnter?: (event: React.MouseEvent<HTMLDivElement>) => void;
-  onMouseLeave?: (event: React.MouseEvent<HTMLDivElement>) => void;
-}
+type Props<T extends React.ElementType> = BASE_PROPS<T> & {
+  ref?: React.Ref<React.ComponentRef<T>>;
+};
 
-const StyledBaseComponent = styled.div<Props>`
+const DEFAULT_ELEMENT = 'div';
+
+type ELEMENT_TYPE = typeof DEFAULT_ELEMENT;
+
+const Container = styled.div<Props<ELEMENT_TYPE>>`
   /* 기본 스타일 */
   box-sizing: border-box;
   position: relative;
@@ -38,27 +38,11 @@ const StyledBaseComponent = styled.div<Props>`
   }
 `;
 
-const BaseComponent: React.FC<Props> = ({
+function BaseComponent<T extends React.ElementType = typeof DEFAULT_ELEMENT>({
   children,
-  className,
-  style,
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
   ...props
-}) => {
-  return (
-    <StyledBaseComponent
-      className={className}
-      style={style}
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      {...props}
-    >
-      {children}
-    </StyledBaseComponent>
-  );
-};
+}: Props<T>) {
+  return <Container {...props}>{children}</Container>;
+}
 
 export default BaseComponent;
